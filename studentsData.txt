@@ -1,5 +1,4 @@
 1 Jamel Jerusalem 11 13/9/2023
-2 Amar Jerusalem 12 2023-06-02
 3 Rashed Jerusalem 11 2023-06-03
 4 Husen Ramallah 12 2023-06-04
 5 Sarah Ramallah 11 2023-06-05

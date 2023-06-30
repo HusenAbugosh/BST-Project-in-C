@@ -279,7 +279,7 @@ void FileOperations(tnode** tNode,int op){
     case 1 : {
 
         // read id from the file:
-        FILE *file = fopen("studentsid.txt", "r"); //<-- will open the wanted file & put it on the reading mode.
+        FILE *file = fopen("studentsData.txt", "r"); //<-- will open the wanted file & put it on the reading mode.
 
         // this if-statment used to check if there any error with openning the file.
         if (file == NULL){
@@ -315,7 +315,7 @@ void FileOperations(tnode** tNode,int op){
 
     case 2 : {
        //save id to the file:
-        FILE* file = fopen("studentsid.txt", "w"); //<-- open the file in write mode
+        FILE* file = fopen("studentsData.txt", "w"); //<-- open the file in write mode
 
         if (file == NULL) {
             printf("Error opening file!\n");
