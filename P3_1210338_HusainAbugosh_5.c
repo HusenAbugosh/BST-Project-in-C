@@ -275,19 +275,21 @@ void saveToFile(tnode* node, FILE* file) {
 
 void FileOperations(tnode** tNode,int op){
 
+    // assume the file data will be in this form: (Id StudentName City ClassId Date).
+
     switch (op){
     case 1 : {
 
-        // read id from the file:
+        // read data from the file:
         FILE *file = fopen("studentsData.txt", "r"); //<-- will open the wanted file & put it on the reading mode.
 
-        // this if-statment used to check if there any error with openning the file.
+        // this if-statment used to check if there any error with openning the file:
         if (file == NULL){
             printf("*ERROR: File couldn't be opened*\n");
         }
 
         printf("\nReading the id...\n ");
-        //varibales will hold the id in it .
+        // varibales will hold the data in it:
         int id;
         char stdName[20];
         char city[20];
