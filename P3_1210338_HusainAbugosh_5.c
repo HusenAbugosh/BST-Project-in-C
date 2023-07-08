@@ -13,12 +13,13 @@
 typedef struct  Node{
     char stdName[20];     //<-- will held the student name in it.
     int classId;         //<-- will held the classId in it.
+     int id;             //<-- will held the id in it.
     struct Node* next;    //<--  will store the address of the next node (points on the NEXT NODE thats why its id is struct node).
 }Node;
 
 
 // to create a Node(object of struct):
-Node* create_node(char* name, int classId){
+Node* create_node(char* name, int classId, int id){
     Node* newNode = (Node*)malloc(sizeof(Node));
 
     // if there is no space in the memo:
@@ -29,6 +30,7 @@ Node* create_node(char* name, int classId){
     // to insert the id and set up the pointers:
         strcpy(newNode->stdName, name); 
         newNode->classId = classId;    
+        newNode->id = id;
         newNode -> next = NULL;
         return newNode;
     }
@@ -36,9 +38,9 @@ Node* create_node(char* name, int classId){
 
 
 // to insert a id in the linked list:
-void insert(Node** head, char* name, int classId){
+void insert(Node** head, char* name, int classId,int id){
 
-    Node* new_node = create_node(name, classId);
+    Node* new_node = create_node(name, classId, id);
     if (*head == NULL){
         *head = new_node;
     }else{
@@ -56,7 +58,7 @@ void display(Node* head){
     // while is the current_node is not null then print the id that store in this node.
     Node*  current_node = head;
     while (current_node != NULL){
-        printf("Student Name: %s \n", current_node->stdName);
+        printf("Student Name: %s \t id:%d \t ClassId:%d \n", current_node->stdName,current_node->id,current_node->classId);
         current_node = current_node->next;
     }
 }
@@ -108,7 +110,7 @@ int isEmpty(Node* head){
     newNode->id = id;                      //<-- set id attribute to be the insert id from the user.
     strcpy(newNode->stdName, stdName);    //<-- set stdName attribute to be the insert stdName from the user.
     strcpy(newNode->city, city);         //<-- set city attribute to be the insert city from the user.
-    newNode->classId = classId;          //<-- set classId attribute to be the insert classId from the user.
+    newNode->classId = classId;         //<-- set classId attribute to be the insert classId from the user.
     strcpy(newNode->date, date);       //<-- set date attribute to be the insert date from the user.
     newNode->left = NULL;             //<-- set the lift pointer to null temprorey.
     newNode->right = NULL;           //<-- set the right pointer to null temprorey.
@@ -146,8 +148,9 @@ void Traversal(tnode* root, Node** head){
     if(root == NULL) {
         return;  
     }
-
-    insert(head,root->stdName, root->classId);
+    
+    // copy the tree node to be a list node:
+    insert(head,root->stdName, root->classId, root->id);
 
     Traversal(root->left,head);                  //<--  move to the most left node .
     Traversal(root->right,head);                //<-- move to the right.
@@ -288,7 +291,7 @@ void FileOperations(tnode** tNode,int op){
             printf("*ERROR: File couldn't be opened*\n");
         }
 
-        printf("\nReading the id...\n ");
+        printf("\nReading the File...\n ");
         // varibales will hold the data in it:
         int id;
         char stdName[20];
@@ -366,7 +369,7 @@ void insertaion(tnode** tNode){
 }
 
 
-void updateid(tnode** tNode){
+void updateId(tnode** tNode){
 
     int id; 
     printf("Please enter student ID you want to update: ");
@@ -458,7 +461,7 @@ void CityTraversal(tnode* root, Node** head,char* city){
      
     // we will insert the student name ONLY if he live in the SELECTED city.
     if(strcmp(root->city, city) == 0){
-      insert(head,root->stdName, root->classId);
+      insert(head,root->stdName, root->classId, root->id);
     }
     CityTraversal(root->left,head,city);                  //<--  move to the most left node .
     CityTraversal(root->right,head,city);                //<-- move to the right.
@@ -565,7 +568,7 @@ void classIdList(Node* list){
     while (temp != NULL){
 
         // insert the current node to subList.
-        insert(&subList,temp->stdName,temp->classId);
+        insert(&subList,temp->stdName,temp->classId,temp->id);
 
         // check if temp->next is NULL to avoid zsh.
         if (temp->next == NULL || temp->classId != temp->next->classId){
@@ -617,7 +620,7 @@ int main(){
                 break;
             case 2:
                 printf("\n");
-                updateid(&root);
+                updateId(&root);
                 break;
             case 3:
                 printf("\n");
@@ -675,9 +678,3 @@ int main(){
     }
     return 1;
 }
-
-
-
-
-
-
